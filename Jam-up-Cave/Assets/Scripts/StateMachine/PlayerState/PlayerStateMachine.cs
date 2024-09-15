@@ -1,4 +1,5 @@
 using StateMachine.BaseClass;
+using UnityEngine;
 
 namespace StateMachine.PlayerState
 {
@@ -9,7 +10,7 @@ namespace StateMachine.PlayerState
         public readonly PlayerIdleState IdleState;
         public readonly PlayerMoveState MoveState;
     
-        public PlayerStateMachine(Player player)
+        public PlayerStateMachine(Player.Player player)
         {
             IdleState = new PlayerIdleState(player);
             MoveState = new PlayerMoveState(player);

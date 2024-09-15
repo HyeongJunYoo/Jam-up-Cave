@@ -1,17 +1,35 @@
 using StateMachine.PlayerState;
 using UnityEngine;
 
-namespace StateMachine
+namespace Player
 {
+    [RequireComponent(typeof(PlayerInput), typeof(PlayerMovement))]
     public class Player : MonoBehaviour
     {
+        [SerializeField] private PlayerInput playerInput;
+        [SerializeField] private PlayerMovement playerMovement;
+        
         public CharacterController CharacterController { get; private set; }
         public PlayerStateMachine StateMachine { get; private set; }
+        
 
         private void Awake()
         {
-            CharacterController = GetComponent<CharacterController>();
             StateMachine = new PlayerStateMachine(this);
+        }
+        
+        private void Start()
+        {
+            CharacterController = GetComponent<CharacterController>();            
+            playerInput = GetComponent<PlayerInput>();
+            playerMovement = GetComponent<PlayerMovement>();
+            
+            StateMachine.Initialize();
+        }
+        
+        private void Update()
+        {
+            StateMachine.Update();
         }
     }
 }

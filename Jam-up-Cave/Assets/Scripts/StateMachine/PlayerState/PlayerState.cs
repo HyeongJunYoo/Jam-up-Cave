@@ -4,9 +4,9 @@ namespace StateMachine.PlayerState
 {
     public abstract class PlayerState : BaseState
     {
-        protected Player Player;
+        protected Player.Player Player;
     
-        protected PlayerState(Player player)
+        protected PlayerState(Player.Player player)
         {
             Player = player;
         }

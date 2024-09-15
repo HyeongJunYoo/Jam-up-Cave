@@ -4,6 +4,6 @@ namespace Player
 {
     public class PlayerInput : MonoBehaviour
     {
-    
+        
     }
 }
