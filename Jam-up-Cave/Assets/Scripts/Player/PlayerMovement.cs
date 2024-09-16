@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Player
@@ -7,8 +6,6 @@ namespace Player
     {
         private CharacterController _characterController;
         private Transform _movementDirection;
-        private float _horizontalInput;
-        private float _verticalInput;
         private Vector3 _lastFixedPosition;
         private Vector3 _nextFixedPosition;
         private Vector3 _velocity;
@@ -24,21 +21,18 @@ namespace Player
         {
             _characterController = GetComponent<CharacterController>();
         }
-
-        private void Update()
+        
+        public void MoveCharacter()
         {
-            _horizontalInput = Input.GetAxis("Horizontal");
-            _verticalInput = Input.GetAxis("Vertical");
-            
             var interpolationAlpha = (Time.time - Time.fixedTime) / Time.fixedDeltaTime;
             _characterController.Move(Vector3.Lerp(_lastFixedPosition, _nextFixedPosition, interpolationAlpha) - transform.position);
         }
-
-        private void FixedUpdate()
+        
+        public void CalculateNextFixedPosition(Vector2 moveInput)
         {
             _lastFixedPosition = _nextFixedPosition;
 
-            var planeVelocity = GetXZVelocity(_horizontalInput, _verticalInput);
+            var planeVelocity = GetXZVelocity(moveInput.x, moveInput.y);
             _velocity = new Vector3(planeVelocity.x, 0, planeVelocity.z);
 
             _nextFixedPosition += _velocity * Time.fixedDeltaTime;

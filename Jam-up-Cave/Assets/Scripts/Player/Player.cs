@@ -1,3 +1,4 @@
+using System;
 using StateMachine.PlayerState;
 using UnityEngine;
 
@@ -30,6 +31,12 @@ namespace Player
         private void Update()
         {
             StateMachine.Update();
+            playerMovement.MoveCharacter();
+        }
+
+        private void FixedUpdate()
+        {
+            playerMovement.CalculateNextFixedPosition(playerInput.MoveInput);
         }
     }
 }
