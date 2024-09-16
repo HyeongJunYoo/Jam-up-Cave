@@ -11,7 +11,6 @@ namespace StateMachine.PlayerState
 
         public override void Enter()
         {
-            Debug.Log("Idle State");
         }
 
         public override void Update()
@@ -24,7 +23,6 @@ namespace StateMachine.PlayerState
     
         public override void Exit()
         {
-            Debug.Log("Exit Idle State");
         }
     }
 }

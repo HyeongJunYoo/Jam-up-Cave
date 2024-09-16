@@ -11,7 +11,6 @@ namespace StateMachine.PlayerState
 
         public override void Enter()
         {
-            Debug.Log("Move State");  
         }
         public override void Update()
         {
@@ -23,7 +22,6 @@ namespace StateMachine.PlayerState
 
         public override void Exit()
         {
-            Debug.Log("Exit Move State");
         }
     }
 }
