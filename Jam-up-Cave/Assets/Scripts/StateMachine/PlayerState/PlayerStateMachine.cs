@@ -1,5 +1,5 @@
+using Player;
 using StateMachine.BaseClass;
-using UnityEngine;
 
 namespace StateMachine.PlayerState
 {
@@ -9,11 +9,13 @@ namespace StateMachine.PlayerState
 
         public readonly PlayerIdleState IdleState;
         public readonly PlayerMoveState MoveState;
+        public readonly PlayerAttackState AttackState;
     
-        public PlayerStateMachine(Player.Player player)
+        public PlayerStateMachine(PlayerManager playerManager)
         {
-            IdleState = new PlayerIdleState(player);
-            MoveState = new PlayerMoveState(player);
+            IdleState = new PlayerIdleState(playerManager);
+            MoveState = new PlayerMoveState(playerManager);
+            AttackState = new PlayerAttackState(playerManager);
         }
     
         public override void Initialize()
@@ -32,6 +34,11 @@ namespace StateMachine.PlayerState
         public override void Update()
         {
             CurrentState?.Update();
+        }
+        
+        public override void FixedUpdate()
+        {
+            CurrentState?.FixedUpdate();
         }
     }
 }

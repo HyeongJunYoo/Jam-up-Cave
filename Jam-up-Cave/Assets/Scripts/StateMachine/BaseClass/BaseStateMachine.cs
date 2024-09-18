@@ -5,5 +5,7 @@ namespace StateMachine.BaseClass
         public abstract void Initialize();
         public abstract void Transition(BaseState nexState);
         public abstract void Update();
+        
+        public abstract void FixedUpdate();
     }
 }

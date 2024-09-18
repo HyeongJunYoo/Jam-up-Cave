@@ -1,14 +1,15 @@
+using Player;
 using StateMachine.BaseClass;
 
 namespace StateMachine.PlayerState
 {
     public abstract class PlayerState : BaseState
     {
-        protected Player.Player Player;
+        protected PlayerManager PlayerManager;
     
-        protected PlayerState(Player.Player player)
+        protected PlayerState(PlayerManager playerManager)
         {
-            Player = player;
+            PlayerManager = playerManager;
         }
     }
 }

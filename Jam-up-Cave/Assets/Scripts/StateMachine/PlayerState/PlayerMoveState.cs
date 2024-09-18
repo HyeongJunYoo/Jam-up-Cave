@@ -1,23 +1,31 @@
+using Player;
 using UnityEngine;
 
 namespace StateMachine.PlayerState
 {
     public class PlayerMoveState : PlayerState
     {
-        public PlayerMoveState(Player.Player player) : base(player)
+        public PlayerMoveState(PlayerManager playerManager) : base(playerManager)
         {
-            Player = player;
+            PlayerManager = playerManager;
         }
 
         public override void Enter()
         {
+            PlayerManager.ChangeColor(Color.green);
         }
         public override void Update()
         {
-            if(Mathf.Abs(Player.CharacterController.velocity.x) <= 0 &&
-               Mathf.Abs(Player.CharacterController.velocity.z) <= 0) {
-                Player.StateMachine.Transition(Player.StateMachine.IdleState);
-            }
+            PlayerManager.playerMovement.MoveCharacter();
+            
+            if(PlayerManager.playerInput.MoveInput == Vector2.zero) 
+                PlayerManager.StateMachine.Transition(PlayerManager.StateMachine.IdleState);
+            
+        }
+
+        public override void FixedUpdate()
+        {
+            PlayerManager.playerMovement.CalculateNextFixedPosition(PlayerManager.playerInput.MoveInput);
         }
 
         public override void Exit()
