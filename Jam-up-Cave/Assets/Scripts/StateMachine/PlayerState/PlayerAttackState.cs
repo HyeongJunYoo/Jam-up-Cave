@@ -25,10 +25,7 @@ namespace StateMachine.PlayerState
             if(PlayerManager.playerDetector.IsEnemyDetected() == false)
                 PlayerManager.StateMachine.Transition(PlayerManager.StateMachine.IdleState);
             
-            if (!PlayerManager.playerAttack.IsAttacking && !PlayerManager.playerAttack.IsReloading && PlayerManager.playerAttack.BulletsRemaining > 0)
-            {
-                PlayerManager.playerAttack.Attack().Forget();
-            }
+            PlayerManager.playerAttack.Attack();
         }
 
         public override void FixedUpdate()
