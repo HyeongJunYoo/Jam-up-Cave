@@ -22,10 +22,12 @@ namespace StateMachine.PlayerState
                 PlayerManager.StateMachine.Transition(PlayerManager.StateMachine.MoveState);
             
             
-            if(PlayerManager.playerDetector.IsEnemyDetected() == false)
+            var closestEnemy = PlayerManager.playerDetector.GetClosestEnemy();
+
+            if (closestEnemy == null)
                 PlayerManager.StateMachine.Transition(PlayerManager.StateMachine.IdleState);
-            
-            PlayerManager.playerAttack.Attack();
+            else
+                PlayerManager.playerAttack.Attack(closestEnemy);
         }
 
         public override void FixedUpdate()
