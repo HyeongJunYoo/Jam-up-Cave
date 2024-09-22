@@ -5,40 +5,17 @@ namespace StateMachine.PlayerState
 {
     public class PlayerStateMachine : BaseStateMachine
     {
-        public BaseState CurrentState { get; private set; }
-
+        protected override BaseState CurrentState { get; set; }
+        
         public readonly PlayerIdleState IdleState;
         public readonly PlayerMoveState MoveState;
         public readonly PlayerAttackState AttackState;
-    
-        public PlayerStateMachine(PlayerManager playerManager)
-        {
-            IdleState = new PlayerIdleState(playerManager);
-            MoveState = new PlayerMoveState(playerManager);
-            AttackState = new PlayerAttackState(playerManager);
-        }
-    
-        public override void Initialize()
-        {
-            CurrentState = IdleState;
-            CurrentState.Enter();
-        }
-
-        public override void Transition(BaseState nexState)
-        {
-            CurrentState.Exit();
-            CurrentState = nexState;
-            nexState.Enter();
-        }
-
-        public override void Update()
-        {
-            CurrentState?.Update();
-        }
         
-        public override void FixedUpdate()
+        public PlayerStateMachine(PlayerController playerController)
         {
-            CurrentState?.FixedUpdate();
+            IdleState = new PlayerIdleState(playerController);
+            MoveState = new PlayerMoveState(playerController);
+            AttackState = new PlayerAttackState(playerController);
         }
     }
 }

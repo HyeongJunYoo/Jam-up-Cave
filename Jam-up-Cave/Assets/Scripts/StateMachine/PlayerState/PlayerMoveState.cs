@@ -5,27 +5,27 @@ namespace StateMachine.PlayerState
 {
     public class PlayerMoveState : PlayerState
     {
-        public PlayerMoveState(PlayerManager playerManager) : base(playerManager)
+        public PlayerMoveState(PlayerController playerController) : base(playerController)
         {
-            PlayerManager = playerManager;
+            PlayerController = playerController;
         }
 
         public override void Enter()
         {
-            PlayerManager.ChangeColor(Color.green);
+            PlayerController.ChangeColor(Color.green);
         }
         public override void Update()
         {
-            PlayerManager.playerMovement.MoveCharacter();
+            PlayerController.playerMovement.MoveCharacter();
             
-            if(PlayerManager.playerInput.MoveInput == Vector2.zero) 
-                PlayerManager.StateMachine.Transition(PlayerManager.StateMachine.IdleState);
+            if(PlayerController.playerInput.MoveInput == Vector2.zero) 
+                PlayerController.StateMachine.Transition(PlayerController.StateMachine.IdleState);
             
         }
 
         public override void FixedUpdate()
         {
-            PlayerManager.playerMovement.CalculateNextFixedPosition(PlayerManager.playerInput.MoveInput);
+            PlayerController.playerMovement.CalculateNextFixedPosition(PlayerController.playerInput.MoveInput);
         }
 
         public override void Exit()

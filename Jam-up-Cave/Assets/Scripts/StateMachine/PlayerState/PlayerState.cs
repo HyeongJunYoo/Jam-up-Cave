@@ -5,11 +5,11 @@ namespace StateMachine.PlayerState
 {
     public abstract class PlayerState : BaseState
     {
-        protected PlayerManager PlayerManager;
+        protected PlayerController PlayerController;
     
-        protected PlayerState(PlayerManager playerManager)
+        protected PlayerState(PlayerController playerController)
         {
-            PlayerManager = playerManager;
+            PlayerController = playerController;
         }
     }
 }

@@ -6,28 +6,28 @@ namespace StateMachine.PlayerState
 {
     public class PlayerAttackState : PlayerState
     {
-        public PlayerAttackState(PlayerManager playerManager) : base(playerManager)
+        public PlayerAttackState(PlayerController playerController) : base(playerController)
         {
-            PlayerManager = playerManager;
+            PlayerController = playerController;
         }
 
         public override void Enter()
         {
-            PlayerManager.ChangeColor(Color.red);
+            PlayerController.ChangeColor(Color.red);
         }
 
         public override void Update()
         {
-            if(PlayerManager.playerInput.MoveInput != Vector2.zero) 
-                PlayerManager.StateMachine.Transition(PlayerManager.StateMachine.MoveState);
+            if(PlayerController.playerInput.MoveInput != Vector2.zero) 
+                PlayerController.StateMachine.Transition(PlayerController.StateMachine.MoveState);
             
             
-            var closestEnemy = PlayerManager.playerDetector.GetClosestEnemy();
+            var closestEnemy = PlayerController.playerDetector.GetClosestEnemy();
 
             if (closestEnemy == null)
-                PlayerManager.StateMachine.Transition(PlayerManager.StateMachine.IdleState);
+                PlayerController.StateMachine.Transition(PlayerController.StateMachine.IdleState);
             else
-                PlayerManager.playerAttack.Attack(closestEnemy);
+                PlayerController.playerAttack.Attack(closestEnemy);
         }
 
         public override void FixedUpdate()

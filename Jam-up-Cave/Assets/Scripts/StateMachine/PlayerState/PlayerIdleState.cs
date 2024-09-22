@@ -5,23 +5,23 @@ namespace StateMachine.PlayerState
 {
     public class PlayerIdleState : PlayerState
     {
-        public PlayerIdleState(PlayerManager playerManager) : base(playerManager)
+        public PlayerIdleState(PlayerController playerController) : base(playerController)
         {
-            PlayerManager = playerManager;
+            PlayerController = playerController;
         }
 
         public override void Enter()
         {
-            PlayerManager.ChangeColor(Color.white);
+            PlayerController.ChangeColor(Color.white);
         }
 
         public override void Update()
         {
-            if(PlayerManager.playerInput.MoveInput != Vector2.zero) 
-                PlayerManager.StateMachine.Transition(PlayerManager.StateMachine.MoveState);
+            if(PlayerController.playerInput.MoveInput != Vector2.zero) 
+                PlayerController.StateMachine.Transition(PlayerController.StateMachine.MoveState);
             
-            if(PlayerManager.playerDetector.IsEnemyDetected())
-                PlayerManager.StateMachine.Transition(PlayerManager.StateMachine.AttackState);
+            if(PlayerController.playerDetector.IsEnemyDetected())
+                PlayerController.StateMachine.Transition(PlayerController.StateMachine.AttackState);
             
         }
 

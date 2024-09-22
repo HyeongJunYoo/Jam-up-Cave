@@ -1,5 +1,6 @@
 using StateMachine.PlayerState;
 using UnityEngine;
+using PlayerStateMachine = StateMachine.PlayerState.PlayerStateMachine;
 
 namespace Player
 {
@@ -7,7 +8,7 @@ namespace Player
     [RequireComponent(typeof(PlayerMovement))]
     [RequireComponent(typeof(PlayerAttack))]
     [RequireComponent(typeof(PlayerDetector))]
-    public class PlayerManager : MonoBehaviour
+    public class PlayerController : MonoBehaviour
     {
         public PlayerInput playerInput;
         public PlayerMovement playerMovement;
@@ -37,7 +38,7 @@ namespace Player
             playerAttack = GetComponent<PlayerAttack>();
             playerDetector = GetComponent<PlayerDetector>();
             
-            StateMachine.Initialize();
+            StateMachine.Initialize(StateMachine.IdleState);
         }
         
         private void Update()
