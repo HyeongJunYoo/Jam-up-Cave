@@ -1,7 +1,7 @@
 namespace StateMachine.BaseClass
 {
-    public abstract class BaseStateMachine {
-
+    public abstract class BaseStateMachine{
+        
         protected abstract BaseState CurrentState { get; set; }
         
         public void Initialize(BaseState initialState)

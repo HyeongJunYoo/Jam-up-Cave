@@ -1,4 +1,3 @@
-using StateMachine.PlayerState;
 using UnityEngine;
 using PlayerStateMachine = StateMachine.PlayerState.PlayerStateMachine;
 
@@ -18,13 +17,13 @@ namespace Player
         public CharacterController CharacterController { get; private set; }
         public PlayerStateMachine StateMachine { get; private set; }
         
-        //Test Code : State 변경 시각적으로 보여주기 위한 색
+        //Test Code : State 변경 시각적으로 보여주기 위한 색 ////////////////////////
         public Renderer playerRenderer;
         public void ChangeColor(Color color)
         {
             playerRenderer.material.color = color;
         }
-        
+        //////////////////////////////////////////////////////////////////////
         private void Awake()
         {
             StateMachine = new PlayerStateMachine(this);

@@ -29,18 +29,6 @@ namespace Player
             _characterController.Move(Vector3.Lerp(_lastFixedPosition, _nextFixedPosition, interpolationAlpha) - transform.position);
         }
         
-        // private void OnControllerColliderHit(ControllerColliderHit hit)
-        // {
-        //     if (hit.gameObject.CompareTag("Wall"))
-        //     {
-        //         // 벽의 법선 방향에 수직으로 이동
-        //         var wallTangent = Vector3.Cross(hit.normal, Vector3.down).normalized; // 벽의 접선 방향
-        //         
-        //         _nextFixedPosition = transform.position + wallTangent;
-        //     }
-        // }
-        
-        
         public void CalculateNextFixedPosition(Vector2 moveInput)
         {
             // 이전 위치를 저장합니다.

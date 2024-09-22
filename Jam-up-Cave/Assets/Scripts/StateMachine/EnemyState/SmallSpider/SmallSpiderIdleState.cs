@@ -1,15 +1,13 @@
-using Enemy;
-using Enemy.BaseClass;
-using Enemy.SmallSpider;
+using Enemy.Units.SmallSpider;
 using UnityEngine;
 
 namespace StateMachine.EnemyState.SmallSpider
 {
-    public class EnemySmallSpiderIdleState : EnemySmallSpiderState
+    public class SmallSpiderIdleState : EnemyState<EnemySmallSpiderController>
     {
-        public EnemySmallSpiderIdleState(EnemySmallSpiderController smallSpiderController) : base(smallSpiderController)
+        public SmallSpiderIdleState(EnemySmallSpiderController smallSpiderController) : base(smallSpiderController)
         {
-            SmallSpiderController = smallSpiderController;
+            Controller = smallSpiderController;
         }
 
         public override void Enter()
@@ -20,9 +18,9 @@ namespace StateMachine.EnemyState.SmallSpider
         public override void Update()
         {
             //Damage를 받으면 HitState로 전환
-            if (SmallSpiderController.IsDamaged)
+            if (Controller.damaged.IsDamaged)
             {
-                SmallSpiderController.StateMachine.Transition(SmallSpiderController.StateMachine.SmallSpiderMoveState);
+                Controller.StateMachine.Transition(Controller.StateMachine.SmallSpiderMoveState);
             }
         }
 

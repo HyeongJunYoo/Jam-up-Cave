@@ -1,17 +1,16 @@
 using Enemy;
-using Enemy.SmallSpider;
+using Enemy.Units.SmallSpider;
 using UnityEngine;
 
 namespace StateMachine.EnemyState.SmallSpider
 {
-    public class EnemySmallSpiderMoveState : EnemySmallSpiderState
+    public class SmallSpiderMoveState : EnemyState<EnemySmallSpiderController>
     {
         private float _timer;
-
-
-        public EnemySmallSpiderMoveState(EnemySmallSpiderController smallSpiderController) : base(smallSpiderController)
+        
+        public SmallSpiderMoveState(EnemySmallSpiderController smallSpiderController) : base(smallSpiderController)
         {
-            SmallSpiderController = smallSpiderController;
+            Controller = smallSpiderController;
             _timer = 0;
         }
 
@@ -23,9 +22,11 @@ namespace StateMachine.EnemyState.SmallSpider
         public override void Update()
         {
             //3초후 IdleState로 전환
+            Controller.movement.Flee();
+            
             _timer += Time.deltaTime;
             if(_timer > 3f)
-                SmallSpiderController.StateMachine.Transition(SmallSpiderController.StateMachine.SmallSpiderIdleState);
+                Controller.StateMachine.Transition(Controller.StateMachine.SmallSpiderIdleState);
           
         }
 
@@ -37,7 +38,7 @@ namespace StateMachine.EnemyState.SmallSpider
         public override void Exit()
         {
             _timer = 0;
-            SmallSpiderController.IsDamaged = false;
+            Controller.damaged.IsDamaged = false;
         }
     }
 }

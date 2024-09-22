@@ -1,19 +1,19 @@
-using Enemy.SmallSpider;
+using Enemy.Units.SmallSpider;
 using StateMachine.BaseClass;
 
 namespace StateMachine.EnemyState.SmallSpider
 {
     public class EnemySmallSpiderStateMachine : BaseStateMachine
-    { 
+    {
         protected override BaseState CurrentState { get; set; }
-
-        public readonly EnemySmallSpiderIdleState SmallSpiderIdleState;
-        public readonly EnemySmallSpiderMoveState SmallSpiderMoveState;
         
-        public EnemySmallSpiderStateMachine(EnemySmallSpiderController smallSpiderController)
+        public readonly SmallSpiderIdleState SmallSpiderIdleState;
+        public readonly SmallSpiderMoveState SmallSpiderMoveState;
+        
+        public EnemySmallSpiderStateMachine(EnemySmallSpiderController enemySmallSpiderController)
         {
-            SmallSpiderIdleState = new EnemySmallSpiderIdleState(smallSpiderController);
-            SmallSpiderMoveState = new EnemySmallSpiderMoveState(smallSpiderController);
+            SmallSpiderIdleState = new SmallSpiderIdleState(enemySmallSpiderController);
+            SmallSpiderMoveState = new SmallSpiderMoveState(enemySmallSpiderController);
         }
     }
 }
