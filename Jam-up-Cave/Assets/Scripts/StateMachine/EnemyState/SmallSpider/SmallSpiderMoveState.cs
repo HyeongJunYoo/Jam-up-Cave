@@ -1,4 +1,3 @@
-using Enemy;
 using Enemy.Units.SmallSpider;
 using UnityEngine;
 
@@ -11,7 +10,7 @@ namespace StateMachine.EnemyState.SmallSpider
         public SmallSpiderMoveState(EnemySmallSpiderController smallSpiderController) : base(smallSpiderController)
         {
             Controller = smallSpiderController;
-            _timer = 0;
+            RestartMoveTimer();
         }
 
         public override void Enter()
@@ -21,11 +20,9 @@ namespace StateMachine.EnemyState.SmallSpider
 
         public override void Update()
         {
-            //3초후 IdleState로 전환
-            Controller.movement.Flee();
+            Controller.movement.Move();
             
-            _timer += Time.deltaTime;
-            if(_timer > 3f)
+            if(IsMoveDurationComplete())
                 Controller.StateMachine.Transition(Controller.StateMachine.SmallSpiderIdleState);
           
         }
@@ -37,8 +34,21 @@ namespace StateMachine.EnemyState.SmallSpider
 
         public override void Exit()
         {
-            _timer = 0;
+            RestartMoveTimer();
             Controller.damaged.IsDamaged = false;
+
+        }
+        
+        private bool IsMoveDurationComplete()
+        {
+            _timer += Time.deltaTime;
+            
+            return _timer > 3f;
+        }
+        
+        private void RestartMoveTimer()
+        {
+            _timer = 0;
         }
     }
 }

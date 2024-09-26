@@ -18,7 +18,7 @@ namespace Player
         public bool IsReloading { get; private set; }
        
         
-        private void Awake()
+        private void Start()
         {
             AttackCooldown = 1f;
             ReloadTime = 1.5f;

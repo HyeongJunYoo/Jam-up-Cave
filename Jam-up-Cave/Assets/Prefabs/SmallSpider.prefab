@@ -135,6 +135,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c39bde99d753894ea526d0e86f45dd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movement: {fileID: 839249937167606644}
+  damaged: {fileID: 6112522572854119650}
   enemyData: {fileID: 11400000, guid: 9aa3e651473c7f441977ed1ee16b6c6d, type: 2}
 --- !u!114 &839249937167606644
 MonoBehaviour:

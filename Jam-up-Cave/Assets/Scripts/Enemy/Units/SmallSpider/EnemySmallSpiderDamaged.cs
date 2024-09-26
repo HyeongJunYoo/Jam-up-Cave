@@ -6,10 +6,9 @@ using UnityEngine;
 namespace Enemy.Units.SmallSpider
 {
     public class EnemySmallSpiderDamaged : MonoBehaviour, IDamageable
-    {
-        public int CurrentHp { get; set; }
+    { 
         public bool IsDamaged { get; set; }
-        
+        private int _currentHp;
         public void Awake()
         { 
             _colorChangeCts = new CancellationTokenSource();
@@ -19,16 +18,16 @@ namespace Enemy.Units.SmallSpider
         
         public void TakeDamage(int damage)
         {
-            CurrentHp -= damage;
+            _currentHp -= damage;
            
             IsDamaged = true;
             _colorChangeCts.Cancel();  // 이전에 실행 중인 작업을 취소
             _colorChangeCts = new CancellationTokenSource();  // 새로운 취소 토큰 소스 생성
             
             ChangeColorAsync(Color.red,  _colorChangeCts.Token).Forget();  // Forget 메서드로 예외 처리
-            Debug.Log(name + " took " + damage + " damage. Remaining Health: " + CurrentHp);
+            Debug.Log(name + " took " + damage + " damage. Remaining Health: " + _currentHp);
 
-            if (!(CurrentHp <= 0)) return;
+            if (!(_currentHp <= 0)) return;
             
             _colorChangeCts.Cancel();
             Die();
@@ -37,6 +36,11 @@ namespace Enemy.Units.SmallSpider
         public void Die()
         {
             Destroy(gameObject);
+        }
+        
+        public void SetHp(int hp)
+        {
+            _currentHp = hp;
         }
         
         

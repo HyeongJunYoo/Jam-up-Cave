@@ -27,16 +27,16 @@ namespace Player
         private void Awake()
         {
             StateMachine = new PlayerStateMachine(this);
-        }
-        
-        private void Start()
-        {
+            
             CharacterController = GetComponent<CharacterController>();            
             playerInput = GetComponent<PlayerInput>();
             playerMovement = GetComponent<PlayerMovement>();
             playerAttack = GetComponent<PlayerAttack>();
             playerDetector = GetComponent<PlayerDetector>();
-            
+        }
+        
+        private void Start()
+        {
             StateMachine.Initialize(StateMachine.IdleState);
         }
         

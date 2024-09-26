@@ -19,6 +19,7 @@ namespace Player
         
         public bool IsEnemyDetected()
         {
+            // 적이 감지되었는지 여부 반환
             return Physics.OverlapSphereNonAlloc(transform.position, AttackRange, EnemiesCollider, _enemyLayer) > 0;
         }
         
@@ -27,8 +28,10 @@ namespace Player
             Collider closestEnemy = null;
             var minDistanceSqr = float.MaxValue;
             
+            // 주변에 있는 적들을 검색합니다.
             var enemyCount = Physics.OverlapSphereNonAlloc(transform.position, AttackRange, EnemiesCollider, _enemyLayer);
             
+            // 가장 가까운 적을 찾습니다.
             for (var i = 0; i < enemyCount; i++)
             {
                 var col = EnemiesCollider[i];
@@ -44,12 +47,14 @@ namespace Player
                 }
             }
 
+            // 가장 가까운 적의 게임 오브젝트를 반환합니다.
             return closestEnemy?.gameObject;
         }
         
 
 #if UNITY_EDITOR
-        public void OnDrawGizmosSelected()
+        // 에디터 상에서만 적의 감지 범위를 표시합니다.
+        public void OnDrawGizmos()
         {
             Gizmos.color = Color.red;   
             Gizmos.DrawWireSphere(transform.position, AttackRange);

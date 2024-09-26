@@ -22,20 +22,19 @@ namespace Enemy.Units.SmallSpider
         public void Awake()
         { 
             StateMachine = new EnemySmallSpiderStateMachine(this);
+            movement = GetComponent<EnemySmallSpiderMovement>();
+            damaged = GetComponent<EnemySmallSpiderDamaged>();
         }
         
         public void Start()
         {
-            movement = GetComponent<EnemySmallSpiderMovement>();
-            damaged = GetComponent<EnemySmallSpiderDamaged>();
-
             Initialize();
         }
         
         private void Initialize()
         {
             movement.SetSpeed(EnemyData.speed);
-            damaged.CurrentHp = EnemyData.health;
+            damaged.SetHp(EnemyData.health);
             
             StateMachine.Initialize(StateMachine.SmallSpiderIdleState);
         }

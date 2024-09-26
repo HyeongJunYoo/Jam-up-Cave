@@ -15,12 +15,8 @@ namespace Player
         
         private void Awake()
         {
-            _movementDirection = transform;
-        }
-
-        private void Start()
-        {
             _characterController = GetComponent<CharacterController>();
+            _movementDirection = transform;
         }
         
         public void MoveCharacter()
