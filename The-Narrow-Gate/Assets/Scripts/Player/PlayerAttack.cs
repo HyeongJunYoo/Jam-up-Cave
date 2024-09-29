@@ -21,13 +21,29 @@ namespace Player
         private void Start()
         {
             AttackCooldown = 1f;
-            ReloadTime = 1.5f;
-            Damage = 10;
+            ReloadTime = 2.0f;
+            Damage = 5;
             TotalAmmo = 10;
             CurrentAmmo = TotalAmmo;
             
             IsAttacking = false;
             IsReloading = false;
+        }
+        
+        public void Attack(GameObject target)
+        {
+            // 공격 중이거나 재장전 중이면 공격하지 않음
+            if (IsAttacking || IsReloading) return;
+            
+            // 총알이 남아있으면 공격, 없으면 재장전
+            if (CurrentAmmo > 0)
+            {
+                AttackAsync(target).Forget();
+            }
+            else
+            {
+                ReloadAsync().Forget();
+            }
         }
         
         private async UniTask AttackAsync(GameObject enemy)
@@ -49,6 +65,7 @@ namespace Player
             await UniTask.Delay(TimeSpan.FromSeconds(AttackCooldown));
             IsAttacking = false;
 
+            // 총알이 다 떨어졌으면 재장전
             if (CurrentAmmo <= 0)
             {
                 await ReloadAsync();
@@ -67,20 +84,6 @@ namespace Player
             CurrentAmmo = TotalAmmo;
             Debug.Log("Reload Complete!");
             IsReloading = false;
-        }
-        
-        public void Attack(GameObject target)
-        {
-            if (IsAttacking || IsReloading) return;
-            
-            if (CurrentAmmo > 0)
-            {
-                AttackAsync(target).Forget();
-            }
-            else
-            {
-                ReloadAsync().Forget();
-            }
         }
     }
 }

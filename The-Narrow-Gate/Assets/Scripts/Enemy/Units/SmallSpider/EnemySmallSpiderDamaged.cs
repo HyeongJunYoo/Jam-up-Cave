@@ -50,7 +50,7 @@ namespace Enemy.Units.SmallSpider
         private async UniTask ChangeColorAsync(Color color, CancellationToken token = default)
         {
             enemyRenderer.material.color = color;
-            await UniTask.WaitForSeconds(0.1f, cancellationToken: token);
+            await UniTask.WaitForSeconds(0.05f, cancellationToken: token);
             enemyRenderer.material.color = Color.white;
         }
         
